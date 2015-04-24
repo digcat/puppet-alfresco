@@ -25,8 +25,10 @@ class alfresco::packages inherits alfresco {
       }
 
 		  $packages = [ 
+				"wget",
 				"git", 
         $jpackage,
+				"zip",
 		 		"unzip",
 				"curl",
 				"ghostscript", 
@@ -55,6 +57,7 @@ class alfresco::packages inherits alfresco {
 				"gdebi-core",
 				"git", 
 		 		"unzip",
+				"zip",
 				"curl",
 				"fonts-liberation", 
 				"fonts-droid", 
