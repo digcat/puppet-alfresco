@@ -12,7 +12,7 @@ class alfresco::params {
 	$alfresco_base_dir	= "/opt/alfresco"
 	$tomcat_home		= "/opt/alfresco/tomcat"
 
-	$alfresco_version		= "4.2.f"
+	$alfresco_version	= "4.2.f"
 
 	$download_path		= "/opt/downloads"
 
@@ -21,4 +21,6 @@ class alfresco::params {
 	$db_pass		= "alfresco"
 	$db_name		= "alfresco"
 	$db_host		= "localhost"
+        $db_type                = "mysql"
+        $db_port                = "3306"
 }

@@ -79,25 +79,27 @@ class alfresco (
   $alfresco_base_dir		= $alfresco::params::alfresco_base_dir,
   $tomcat_home			= $alfresco::params::tomcat_home,
   $alfresco_version		= $alfresco::params::alfresco_version,
-  $download_path			= $alfresco::params::download_path,
+  $download_path		= $alfresco::params::download_path,
   $db_root_password		= $alfresco::params::db_root_password	,
   $db_user			= $alfresco::params::db_user,
   $db_pass			= $alfresco::params::db_pass,
   $db_name			= $alfresco::params::db_name,
   $db_host			= $alfresco::params::db_host,
-  $db_port			= 3306,
-  $mail_host    = 'localhost',
-  $mail_port    = 25,
+  $db_port			= $alfresco::params::db_port,
+  $db_type                      = $alfresco::params::db_type,
+  $mail_host                    = 'localhost',
+  $mail_port                    = 25,
   $mem_xmx			= "32G",
   $mem_xxmaxpermsize		= "512m",
-  $delay_before_tests = 1,
-  $apt_cache_host = '',
-  $apt_cache_port = 3142,
-  $ssl_cert_path = '',
-  $enable_proxy = true
+  $delay_before_tests           = 1,
+  $apt_cache_host               = '',
+  $apt_cache_port               = 3142,
+  $ssl_cert_path                = '',
+  $enable_proxy                 = true
 ) inherits alfresco::params {
 
   include alfresco::urls
+  include alfresco::dbdetails
 
   $admin_pass_hash = calc_ntlm_hash($initial_admin_pass)
 
@@ -118,17 +120,31 @@ class alfresco (
       $alfresco_ce_url = $alfresco::urls::alfresco_ce_url
       $indexer = 'solr'
       $cmis_url = '/alfresco/s/cmis'
+      $install_java_version = 7
     }
     '5.0.x', 'NIGHTLY': {
       $indexer = 'solr4'
       $cmis_url = '/alfresco/cmisatom'
+      $install_java_version = 8
     }
     default: {
       fail("Unsupported version ${alfresco_version}")
     }	
   }
 
-
+ case($db_type){
+    'mysql': {
+       $alfresco_db_driver = "${alfresco::dbdetails::mysql_driver}"
+       $alfresco_db_params = "${alfresco::dbdetails::mysql_params}"
+    }
+    'postgresql': {
+       $alfresco_db_driver = "${alfresco::dbdetails::postgresql_driver}"       
+       $alfresco_db_params = "${alfresco::dbdetails::postgresql_params}"
+    }
+    default: {
+      fail("Database not supported ${alfresco::params::db_type}")
+    }
+ }
 
  case $::osfamily {
   'RedHat': {
@@ -154,7 +170,7 @@ class alfresco (
   $alfresco_db_pass = $db_pass
   $alfresco_db_host = $db_host
   $alfresco_db_port = $db_port
-
+  $alfresco_db_type = $db_type
 
   $alfresco_unpacked = "${download_path}/alfresco"
   $alfresco_war_loc = "${alfresco_unpacked}/web-server/webapps"
@@ -193,7 +209,6 @@ class alfresco (
       before => Class['alfresco::install'],
     }
   }	
-
 
   # for some reason packages are being applied out of order, so bind them to a run stage:
   stage { 'deps':
