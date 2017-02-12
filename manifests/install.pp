@@ -6,7 +6,8 @@ class alfresco::install inherits alfresco {
   class { 'alfresco::install::postgresql': }
   class { 'alfresco::install::proxy': }
   class { 'alfresco::install::iptables': }
-  class { 'alfresco::install::jdk': }
+# now we do oracle in packages.pp
+#  class { 'alfresco::install::jdk': }
 
   file { $download_path:
     ensure => "directory",
@@ -381,7 +382,6 @@ class alfresco::install inherits alfresco {
         "libjpeg62-dev",
         "libfreetype6-dev",
         "libpng12-dev",
-        "libt1-dev",
       ]
 
 

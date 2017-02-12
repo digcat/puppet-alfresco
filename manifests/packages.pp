@@ -40,20 +40,41 @@ class alfresco::packages inherits alfresco {
 
     'Debian': {
 
- #     if $install_java_version == 8 {
+     if $install_java_version == 8 {
 
- #       $jpackage=""
- #       # auto accept oracle license: http://askubuntu.com/a/190674/33804
-#
-#        class { 'apt': } ->
-#        apt::ppa { 'ppa:webupd8team/java': } ->
-#        package { 'oracle-java8-installer':
-#          ensure => installed,
-#        }
-#      } else {
-#        $jpackage="openjdk-7-jdk"
-#        alfresco::ensure_packages { "$jpackage": }
-#      }
+       $jpackage=""
+       # auto accept oracle license: http://askubuntu.com/a/190674/33804
+
+        class { 'apt': } ->
+        apt::ppa { 'ppa:webupd8team/java': } ->
+         # https://gist.github.com/tfnico/6d2b57642d21ebaa7574
+         # update the apt keystore
+         exec { 'apt-key-update':
+           unless => "update-alternatives --list java|grep java-8-oracle 2>/dev/null",
+           command => 'apt-key update',
+           path => ['/usr/bin/','/bin/'],
+         } ->
+         # update apt sources
+         exec { 'apt-update for oracle':
+           unless => "update-alternatives --list java|grep java-8-oracle 2>/dev/null",
+           command => 'apt-get update',
+           path => ['/usr/bin/','/bin/'],
+         } ->
+         # set license acceptance with debconf
+         exec { 'accept-java-license':
+           unless => "update-alternatives --list java|grep java-8-oracle 2>/dev/null",
+           command => 'echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections',
+           path => ['/usr/bin/','/bin/'],
+         } ~>
+         # finally install the package
+         # oracle-java6-installer and oracle-java7-installer also available from the ppa
+        package { 'oracle-java8-installer':
+          ensure => present,
+        }
+      } else {
+        $jpackage="openjdk-7-jdk"
+        alfresco::ensure_packages { "$jpackage": }
+      }
 
 
       $packages = [
@@ -63,7 +84,7 @@ class alfresco::packages inherits alfresco {
         "zip",
         "curl",
         "fonts-liberation",
-        "fonts-droid",
+        "fonts-droid-fallback",
         "imagemagick",
         "ghostscript",
         "libjpeg62",
