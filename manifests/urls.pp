@@ -12,6 +12,13 @@ class alfresco::urls {
   $alfresco_ce_url = "http://dl.alfresco.com/release/community/4.2.f-build-00012/${alfresco_ce_filename}"
   $alfresco_war_42x = "https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/${v42x}/alfresco-${v42x}.war"
   $share_war_42x = "https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/${v42x}/share-${v42x}.war"
+  
+  $spp_v4 = "http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-spp-4.2.f.zip"
+  $spp_v4_zipname = "alfresco-community-spp-4.2.f.zip"
+  $spp_v4_name = "alfresco-community-spp-4.2.f.amp"
+
+  $solr_dl_file = 'alfresco-community-solr-4.2.f.zip'
+  $solr_dl = "http://dl.alfresco.com/release/community/4.2.f-build-00012/${solr_dl_file}"
 
   $alfresco_war_50x = "https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/${v50x}/alfresco-${v50x}.war"
   $share_war_50x = "https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/${v50x}/share-${v50x}.war"
@@ -22,9 +29,6 @@ class alfresco::urls {
   $solr_cfg_file = "alfresco-solr4-${v50x}-config-ssl.zip"
   $solr_cfg_dl = "https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/${v50x}/$solr_cfg_file"
 
-  $spp_v4 = "http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-spp-4.2.f.zip"
-  $spp_v4_zipname = "alfresco-community-spp-4.2.f.zip"
-  $spp_v4_name = "alfresco-community-spp-4.2.f.amp"
 
   $spp_amp_v5 = "https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/${v50x}/alfresco-spp-${v50x}.amp"
   $spp_amp_v5_name = "alfresco-spp-${v50x}.amp"
@@ -43,7 +47,5 @@ class alfresco::urls {
   $filename_tomcat = "${name_tomcat}.tar.gz"
   $url_tomcat = "http://archive.apache.org/dist/tomcat/tomcat-7/v${tomcat_version}/bin/${filename_tomcat}"
 
-  $solr_dl_file = 'alfresco-community-solr-4.2.f.zip'
-  $solr_dl = "http://dl.alfresco.com/release/community/4.2.f-build-00012/${solr_dl_file}"
 
 }
