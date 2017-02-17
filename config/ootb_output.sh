@@ -14,9 +14,10 @@ function write_output {
 	db_name=`get_param db_name`
 	db_host=`get_param db_host`
 	db_port=`get_param db_port`
+        db_type=`get_param db_type`
 	mem_xmx=`get_param mem_xmx`
 	mem_xxmaxpermsize=`get_param mem_xxmaxpermsize`
-  ssl_cert_path=`get_param ssl_cert_path`
+        ssl_cert_path=`get_param ssl_cert_path`
 
 	echo -e "${GREEN}Writing puppet file ${BLUE}go.pp${WHITE}"
 	cat > go.pp <<EOF
@@ -34,6 +35,7 @@ class { 'alfresco':
 	db_name => '${db_name}',	
 	db_host => '${db_host}',	
 	db_port => '${db_port}',	
+        db_type => '${db_type}',
 	mem_xmx => '${mem_xmx}',
 	mem_xxmaxpermsize => '${mem_xxmaxpermsize}',
   ssl_cert_path => '${ssl_cert_path}',
@@ -56,6 +58,7 @@ class { 'alfresco::tests':
 	db_name => '${db_name}',	
 	db_host => '${db_host}',	
 	db_port => '${db_port}',	
+        db_type => '${db_type}',
 	mem_xmx => '${mem_xmx}',
 	mem_xxmaxpermsize => '${mem_xxmaxpermsize}',
 }

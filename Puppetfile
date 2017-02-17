@@ -2,6 +2,8 @@ forge "https://forgeapi.puppetlabs.com"
 
 mod "puppetlabs/mysql"
 
+mod "puppetlabs/postgresql", "4.8.0"
+
 mod "puppetlabs/apache"
 
 mod "puppetlabs/concat"

@@ -55,6 +55,11 @@ params[$IDX]="download_path"
 descr[$IDX]="Where to store downloaded files"
 default[$IDX]="/opt/downloads"
 
+IDX=$(( $IDX + 1 ))
+params[$IDX]="db_type"
+descr[$IDX]="Database type - IMPORTANT - if you change this you probably need to change the db_port too: defaults - mysql:3306, postgresql:5432"
+default[$IDX]="mysql"
+choices[$IDX]="mysql|postgresql"
 
 IDX=$(( $IDX + 1 ))
 params[$IDX]="db_root_password"

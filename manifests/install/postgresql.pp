@@ -1,13 +1,14 @@
 class alfresco::install::postgresql inherits alfresco {
     if $db_host == 'localhost' and $db_type == 'postgresql'  {
-        
     class { 'postgresql::globals':
        encoding => 'UTF-8',
        locale   => 'en_US.UTF-8',
-       manage_package_repo => true,
-       version             => '9.3',
     }->
     class { '::postgresql::server': }
+       postgresql::server::db { "${db_name}":
+          user     => "${db_user}",
+          password => postgresql_password("${db_name}","${db_pass}"),
+       }
        postgresql::server::role { "${db_user}":
           password_hash => postgresql_password("${db_user}", "${db_pass}"),
        }
@@ -15,10 +16,6 @@ class alfresco::install::postgresql inherits alfresco {
           privilege => 'ALL',
           db        => "${db_name}",
           role      => "${db_user}",
-       }
-       postgresql::server::db { "${db_name}":
-          user     => "${db_user}",
-          password => postgresql_password("${db_name}","${db_pass}"),
        }
     }
 
