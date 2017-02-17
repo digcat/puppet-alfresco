@@ -1,6 +1,7 @@
 ## Order of the Bee "Honeycomb" edition of Alfresco
 
 #### New in 1.1
+* Add Postgresql support
 * ImageMagick paths updated on each run
 * Now using Librarian-puppet to manage puppet modules
 * Monitoring with monitorix on port 8088
