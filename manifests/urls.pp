@@ -42,7 +42,7 @@ class alfresco::urls {
   $swftools_src_name = 'swftools-2013-04-09-1007'
   $swftools_src_url = "http://www.swftools.org/${swftools_src_name}.tar.gz"
 
-  $tomcat_version = '7.0.70'
+  $tomcat_version = '7.0.75'
   $name_tomcat = "apache-tomcat-${tomcat_version}"
   $filename_tomcat = "${name_tomcat}.tar.gz"
   $url_tomcat = "http://archive.apache.org/dist/tomcat/tomcat-7/v${tomcat_version}/bin/${filename_tomcat}"

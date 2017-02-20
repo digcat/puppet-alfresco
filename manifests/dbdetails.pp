@@ -1,13 +1,13 @@
 class alfresco::dbdetails {
 
-  $mysql_connector_version = '5.1.39'
+  $mysql_connector_version = '5.1.40'
   $mysql_root = "https://repo1.maven.org"
   $mysql_location = "maven2/mysql/mysql-connector-java/${mysql_connector_version}"
   $mysql_connector_name = "mysql-connector-java-${mysql_connector_version}"
   $mysql_connector_file = "${mysql_connector_name}.jar"
   $mysql_connector_url = "${mysql_root}/${mysql_location}/${mysql_connector_file}"
   $mysql_driver = "com.mysql.jdbc.Driver"
-  $mysql_params = "?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true"
+  $mysql_params = "?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true&useSSL=false"
   $mysql_default_port = "3306"
 
   $postgresql_connector_version = "9.4.1208"
@@ -22,9 +22,9 @@ class alfresco::dbdetails {
   
 
   if $db_type == "mysql" {
-  
+      $params = $mysql_params 
   }
   if $db_type == "postgresql" {
-
+      $params = $postgresql_params
   }
 }

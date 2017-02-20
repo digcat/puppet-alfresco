@@ -46,7 +46,7 @@ db.type=<%= @alfresco_db_type %>
 # db.url=jdbc:mysql://${db.host}:${db.port}/${db.name}?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true
 
 db.driver=<%= @alfresco_db_driver %>
-db.url=jdbc:<%= @alfresco_db_type %>://<%= @alfresco_db_host %>:<%= @alfresco_db_port %>/<%= @alfresco_db_name %><% @alfresco_db_params %>
+db.url=jdbc:<%= @alfresco_db_type %>://<%= @alfresco_db_host %>:<%= @alfresco_db_port %>/<%= @alfresco_db_name %><%= @alfresco_db_params %>
 
 #db.driver=org.postgresql.Driver
 #db.port=5432
