@@ -72,7 +72,7 @@ class alfresco::packages inherits alfresco {
           ensure => present,
         }
       } else {
-        $jpackage="openjdk-7-jdk"
+        $jpackage="openjdk-8-jdk"
         alfresco::ensure_packages { "$jpackage": }
       }
 
