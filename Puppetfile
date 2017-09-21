@@ -4,7 +4,7 @@ mod "puppetlabs/mysql"
 
 mod "puppetlabs/postgresql", "4.8.0"
 
-mod "puppetlabs/apache"
+mod "puppetlabs/apache","1.11.1"
 
 mod "puppetlabs/concat"
 
