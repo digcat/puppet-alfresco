@@ -1,6 +1,6 @@
 forge "https://forgeapi.puppetlabs.com"
 
-mod "puppetlabs/mysql"
+mod "puppetlabs/mysql","5.1"
 
 mod "puppetlabs/postgresql", "4.8.0"
 
@@ -16,5 +16,5 @@ mod "puppetlabs/vcsrepo"
 
 mod "spantree/java8"
 
-mod "stankevich/python"
+mod "stankevich/python", "1.18.2"
 
